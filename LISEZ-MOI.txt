@@ -1,0 +1,25 @@
+LILIPUT’ADVENTURE · application installable (PWA)
+
+CONTENU : index.html (accueil), regles.html, fiches.html, scenarios.html,
+manifest.webmanifest, sw.js, icons/.
+
+1) HÉBERGER (gratuit, au choix)
+ - Netlify : app.netlify.com/drop, glisse le dossier décompressé. Tu obtiens un lien https.
+ - GitHub Pages : crée un dépôt, dépose tous les fichiers, Settings > Pages > Deploy from branch (main, /root).
+ - Cloudflare Pages : « Upload assets », dépose le dossier.
+L’adresse doit être en https pour que l’installation fonctionne.
+
+2) INSTALLER SUR LE TÉLÉPHONE
+ - Android (Chrome) : ouvre le lien, menu ⋮ > Installer l’application.
+ - iPhone (Safari) : ouvre le lien, Partager > Sur l’écran d’accueil.
+
+3) SAUVEGARDES
+Les fiches et scénarios sont gardés dans le navigateur de l’appareil. Utilise
+« Exporter (.json) » régulièrement ; « Importer » les restaure (aussi sur un autre téléphone).
+Vider les données du navigateur ou désinstaller l’application les efface.
+
+4) MISE À JOUR
+Modifie un fichier, puis change V="liliput-v1" en "liliput-v2" dans sw.js avant de redéposer.
+
+5) POLICES
+Les polices Google se chargent en ligne ; hors ligne, des polices système les remplacent.

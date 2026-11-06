@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liliput’Adventure · Système complet et atelier de scénarios</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16150f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Liliput"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="icon" href="icons/icon-192.png">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap">
+<style>
+:root{--bg:#f4efe3;--paper:#fffdf7;--ink:#1d1b16;--mut:#6a6454;--gold:#c9a227;--soft:#faf1d2;--line:#e6dcb8;--blk:#16150f;--onblk:#e7c657;
+--disp:"Cinzel Decorative","Cinzel",Georgia,serif;--hd:"Cinzel",Georgia,serif;--scr:"Dancing Script","Segoe Script",cursive;--tx:"Poppins",system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121109;--paper:#1c1a12;--ink:#f1ead6;--mut:#aaa38c;--gold:#e0b83d;--soft:#2a2512;--line:#3d3720;--blk:#0b0a06;--onblk:#e7c657}}
+:root[data-theme="dark"]{--bg:#121109;--paper:#1c1a12;--ink:#f1ead6;--mut:#aaa38c;--gold:#e0b83d;--soft:#2a2512;--line:#3d3720;--blk:#0b0a06;--onblk:#e7c657}
+*{box-sizing:border-box}html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.6 var(--tx)}
+.page{max-width:860px;margin:0 auto;padding:28px 20px}
+nav{position:sticky;top:0;z-index:5;background:var(--blk);padding:8px 12px;padding-top:calc(8px + env(safe-area-inset-top,0px));display:flex;gap:6px;overflow-x:auto;justify-content:center}
+nav a{color:var(--onblk);text-decoration:none;font:600 .78rem var(--tx);white-space:nowrap;padding:5px 11px;border-radius:99px;border:1px solid transparent}
+nav a:hover{border-color:var(--gold)}
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover h1{font:700 clamp(2.4rem,9vw,4.6rem)/1.05 var(--disp);color:var(--gold);margin:0;text-shadow:0 2px 0 rgba(0,0,0,.12)}
+.cover .s{font:600 clamp(1.4rem,5vw,2.2rem)/1.3 var(--scr);margin:22px 0 0}
+.cover .by{margin-top:60px;color:var(--mut);font-size:.9rem}
+.orn{width:120px;height:2px;background:var(--gold);margin:22px auto;position:relative}
+.orn:after{content:"✦";position:absolute;left:50%;top:-11px;transform:translateX(-50%);background:var(--bg);padding:0 8px;color:var(--gold)}
+.sec{padding-top:34px}
+h2{font:700 1.7rem var(--hd);color:var(--gold);margin:0 0 4px;display:flex;align-items:center;gap:12px}
+h2:after{content:"";flex:1;height:2px;background:var(--line)}
+.pill{display:inline-block;background:var(--blk);color:var(--onblk);font:600 1.25rem var(--scr);padding:2px 18px;border-radius:12px;margin:22px 0 8px}
+.box{background:var(--soft);border:1px solid var(--line);border-radius:18px;padding:16px 20px;margin-bottom:10px}
+.box p{margin:6px 0}.hl{font-weight:600}
+.rule{background:var(--blk);color:var(--onblk);border-radius:18px;padding:16px 22px;text-align:center;font-weight:600;margin:14px 0}
+.g{display:grid;gap:12px}.g2{grid-template-columns:repeat(auto-fit,minmax(300px,1fr))}.g3{grid-template-columns:repeat(auto-fit,minmax(230px,1fr))}
+.step{display:flex;gap:12px}.step b.n{flex:none;width:34px;height:34px;border-radius:50%;background:var(--gold);color:#16150f;display:grid;place-items:center;font-family:var(--hd)}
+table{width:100%;border-collapse:separate;border-spacing:0 4px}
+td,th{padding:7px 12px;text-align:left}td:first-child{background:var(--blk);color:var(--onblk);border-radius:10px 0 0 10px;font-weight:600}
+td:last-child{background:var(--paper);border:1px solid var(--line);border-left:0;border-radius:0 10px 10px 0;font-family:var(--hd);font-weight:700}
+.note{font-size:.85rem;color:var(--mut)}
+.oracle li{list-style:none;padding:5px 14px;margin:3px 0;border-radius:10px;background:var(--blk);color:var(--onblk);font-weight:600}
+.oracle ol{padding:0;margin:0}.oracle li::marker{content:""}
+.oracle li span{display:inline-block;width:1.6em;color:var(--gold)}
+.ex{background:var(--blk);color:#efe7cf;border-radius:18px;padding:16px 22px;font-style:italic}
+.ex b{color:var(--onblk);font-style:normal}
+.tb{background:var(--paper);border:1px solid var(--line);border-top:5px solid var(--gold);border-radius:14px;padding:10px 14px}
+.tb h3{margin:0 0 6px;font:700 1rem var(--hd)}.tb h3 small{color:var(--gold);font-family:var(--tx)}
+.tb ol{margin:0;padding-left:0;list-style:none;columns:1}.tb li{padding:1px 0;font-size:.92rem}.tb li i{display:inline-block;min-width:1.9em;font-style:normal;font-weight:600;color:var(--gold)}
+.big .tb ol{columns:2}
+.map{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:8px}
+.map div{background:var(--soft);border:1px solid var(--line);border-radius:12px;padding:8px 12px}.map b{font-family:var(--hd);color:var(--gold);display:block}
+[contenteditable]{outline:none;border-radius:4px;min-width:3ch;display:inline-block}[contenteditable]:focus{box-shadow:0 0 0 2px var(--gold)}
+[contenteditable]:empty::before{content:attr(data-ph);color:var(--mut);opacity:.6}
+.sheet .f{display:flex;gap:8px;align-items:baseline;border-bottom:1px dotted var(--mut);padding:4px 0;margin:2px 0}.sheet .f b{font:600 1.05rem var(--scr);color:var(--gold);flex:none}.sheet .f span{flex:1}
+.area{min-height:130px;background:var(--paper);border:2px solid var(--ink);border-radius:16px;padding:10px 14px}.area.s{min-height:70px}
+.circ{width:84px;height:84px;border-radius:50%;border:2px solid var(--ink);display:grid;place-items:center;font:700 1.5rem var(--hd)}
+.stat{display:flex;align-items:center;gap:10px}.stat b{background:var(--gold);color:#16150f;padding:2px 12px;border-radius:8px;font:600 1.1rem var(--scr)}
+.bar{display:flex;gap:6px;justify-content:center;margin:10px 0}
+.btn{background:var(--blk);color:var(--onblk);border:0;border-radius:99px;padding:7px 16px;font:600 .85rem var(--tx);cursor:pointer}
+@media print{body{background:#fff;color:#000}nav,.bar{display:none}.sec{break-before:page;padding-top:0}.cover{min-height:100vh;break-after:page}.box,.tb,.ex,.rule{break-inside:avoid}.page{padding:0}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+
+.ic{display:flex;gap:10px;background:var(--paper);border:1px solid var(--line);border-left:5px solid var(--gold);border-radius:12px;padding:9px 12px;min-height:84px}
+.ic b.num{flex:none;width:32px;height:32px;border-radius:50%;background:var(--gold);color:#16150f;display:grid;place-items:center;font-family:var(--hd)}
+.ic>div{flex:1}.ic .p{font-size:.88rem;color:var(--mut)}.ic.bonus{background:var(--soft)}
+.track{display:flex;gap:6px;flex-wrap:wrap;margin:10px 0}.track button{width:42px;height:38px;border:0;border-radius:9px;font:600 1rem var(--tx);cursor:pointer;background:var(--soft);color:var(--ink)}
+.track button.on{background:var(--blk);color:var(--onblk)}
+.chips{display:flex;flex-wrap:wrap;gap:6px;margin-top:8px}.chip{border:1px solid var(--gold);border-radius:99px;padding:1px 12px;font-size:.9rem}
+.add{border:1px dashed var(--mut);background:none;color:var(--mut);border-radius:99px;padding:1px 12px;cursor:pointer;font:inherit;font-size:.85rem}
+.ph{background:var(--soft);border:1px dashed var(--gold);border-radius:12px;padding:8px 12px;min-height:44px;display:block}
+.mode{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:12px}
+@media print{.add{display:none}}
+</style>
+</head>
+<body>
+<nav><a href="index.html" style="color:#e7c657;text-decoration:none;font:600 .85rem system-ui;padding:6px 14px;border-radius:99px;border:1px solid #e7c657;white-space:nowrap">⌂ Accueil</a><a href="#jouer">Jouer</a><a href="#perso">Personnage</a><a href="#combat">Combat</a><a href="#actions">Actions</a><a href="#tables">Tables</a><a href="#scenario">Scénario</a><a href="#fiche">Fiche</a></nav>
+<div class="page">
+
+<section class="cover">
+<h1>Liliput’<br>Adventure</h1><div class="orn"></div>
+<div class="s">Un système de jeu de rôle narratif<br>pour le solo ou l’improvisation</div>
+<div class="s" style="font-size:1.2rem;margin-top:10px">+ Atelier de scénarios et de one shots</div><div class="by">Imaginé par Leila Elkaim</div>
+<div class="bar"><button class="btn" onclick="window.print()">Imprimer / PDF</button></div>
+</section>
+
+<section class="sec" id="jouer">
+<h2>Système de jeu</h2>
+<div class="box"><p>Liliput’Adventure est un jeu de rôle, en solo ou à plusieurs, avec ou sans Maître du Jeu. Il permet d’improviser des aventures en mode narratif, tout en gardant le plaisir du lancer de dé.</p></div>
+<div class="rule">Toute règle peut être adoptée dès lors qu’elle est validée par un consensus des joueurs. C’est pourquoi le jeu peut se passer de MJ.</div>
+
+<div class="pill">Comment jouer ?</div>
+<div class="g">
+<div class="box step"><b class="n">1</b><div><p class="hl">Choisissez un univers et une ambiance</p><p>Frissons ? Aventures épiques contre un dragon ? Ambiance cosy ? Exploration des confins de la galaxie ? Tout est possible. Notez quelques concepts à intégrer ou à éviter, et une ou deux règles du monde.</p></div></div>
+<div class="box step"><b class="n">2</b><div><p class="hl">Créez votre personnage</p><p>Suivez la partie « Création de personnage », étape par étape.</p></div></div>
+<div class="box step"><b class="n">3</b><div><p class="hl">Lancez-vous</p><p>Imaginez une situation de départ et commencez le récit. Appuyez-vous sur l’Oracle et les tables aléatoires pour trouver de l’inspiration et des rebondissements.</p></div></div>
+</div>
+
+<div class="pill">L’Oracle</div>
+<div class="g g2">
+<div class="box"><p>L’Oracle remplace le Maître du Jeu : il répond aux questions du joueur et génère des éléments imprévus. Il définit le monde et les réactions de l’environnement, et maintient l’incertitude et la surprise pour que la session ne devienne pas un simple exercice d’écriture.</p><p class="hl">Posez votre question, lancez un D6 et imaginez les détails de la réponse.</p></div>
+<div class="oracle"><ol><li><span>1</span>Oui</li><li><span>2</span>Oui, mais…</li><li><span>3</span>Oui, et…</li><li><span>4</span>Non</li><li><span>5</span>Non, mais…</li><li><span>6</span>Non, et…</li></ol></div>
+</div>
+</section>
+
+<section class="sec" id="perso">
+<h2>Création de personnage</h2>
+<div class="pill">Identité</div>
+<div class="g g2">
+<div class="box"><p><span class="hl">Nom</span> : le nom de votre personnage.</p><p><span class="hl">Type</span> : ses traits culturels et physiques (sa « race » en medfan, sa nationalité en contemporain…).</p><p><span class="hl">Âge</span> : indique son niveau de maturité et d’expérience.</p><p><span class="hl">Profil</span> : son occupation principale, son métier, le domaine où il excelle.</p></div>
+<div class="box"><p><span class="hl">Traits</span> : une phrase simple qui décrit un trait de personnalité ou une compétence. À la création : <b>2 traits, un positif et un négatif</b>. Ils justifient un bonus ou un malus lors d’un test.</p><p class="note"><b>Exemple :</b> Greg, humain, 56 ans, journaliste retraité. Traits : « Journaliste retraité » et « Alcoolique ». Bonus à ses jets d’écriture et de résistance à l’alcool, malus s’il n’a pas bu depuis plusieurs jours ou doit retrouver sa carte de presse.</p></div>
+</div>
+
+<div class="pill">Défense, attaque, dégâts</div>
+<div class="g g2">
+<div class="box"><p><span class="hl">Défense</span> : un moyen de se protéger (bouclier, sort, capacité…). Le score est <b>fixe</b>. Une armure ou un bouclier ajoute +2 à +5.</p><p><span class="hl">Attaque</span> : un moyen d’attaquer une personne ou un objet. Le score se définit au <b>D20</b> ; une arme spéciale ou un trait peut apporter un bonus ou un malus.</p><p><span class="hl">Dégâts</span> : le dé dépend de l’arme, du sort ou de l’attaque.</p></div>
+<div class="box"><p class="hl">Évaluer un niveau de défense ou d’attaque</p><table id="lvl"></table></div>
+</div>
+<div class="g g2">
+<div><div class="pill" style="margin-top:6px">Dégâts</div><table id="dmg"></table></div>
+<div><div class="pill" style="margin-top:6px">Vigueur</div><table id="vig"></table>
+<p class="note">Les points de vigueur représentent l’énergie vitale : capacité à encaisser coups et fatigue. Définissez-les avec le MJ grâce à ce tableau.</p></div>
+</div>
+
+<div class="pill">Montée de niveau</div>
+<div class="box"><p>Un personnage monte de niveau quand il termine une aventure : une histoire ou un scénario avec un début et une conclusion (une enquête, un chapitre de campagne, une partie…). À chaque niveau, au choix :</p><p>• un nouveau trait, une nouvelle attaque ou un nouveau sort ;<br>• aux niveaux pairs (2, 4, 6, 8…), +1 point de vigueur ou de défense.</p></div>
+</section>
+
+<section class="sec" id="combat">
+<h2>Combat</h2>
+<div class="box"><p>Le personnage fait un jet d’attaque au D20. Son score doit être <b>supérieur à la défense</b> de l’adversaire pour le toucher. Il lance alors son dé de dégâts, qui sont retirés des points de vigueur de la cible.</p></div>
+<div class="g g3">
+<div class="box"><p class="hl">Types d’attaque</p><p>Botte secrète, sort ou arme : tout se joue en narration.</p></div>
+<div class="box"><p class="hl">Initiative</p><p>Si la narration ne tranche pas, lancez un D20 par personnage : le plus haut score commence le tour.</p></div>
+<div class="box"><p class="hl">Fin du combat</p><p>Un personnage peut y mettre fin, fuir ou mourir. À 0 point de vigueur, il est inconscient. Le tuer demande une action de plus, avec des conséquences narratives ou mécaniques : on ne tue pas quelqu’un facilement.</p></div>
+</div>
+
+<div class="pill">Retrouver ses forces</div>
+<div class="g g2"><div class="box"><p>Pour regagner des points de vigueur, il faut subvenir aux besoins du personnage.</p></div><table id="rest"></table></div>
+
+<div class="pill">Exemple de combat</div>
+<div class="ex"><p><b>Larra la magicienne</b> affronte <b>le Seigneur du temps</b>. Initiative : Larra 7, le Seigneur 15. Il commence.</p>
+<p>Il attaque avec son épée à deux mains et active son trait « Soldat émérite » : il lance deux D20 et garde le meilleur (6 et 10, soit 10). La défense de Larra est de 11, supérieure à 10 : l’attaque échoue (elle la pare avec son bouclier de lumière, ou fait un saut périlleux).</p>
+<p>Tour de Larra : sort « Étourdissement ». Attaque 17 contre une défense de 15 : le sort le frappe en pleine tête. Dégâts du sort : 1D6, elle obtient 5. Le Seigneur retire 5 points de vigueur.</p>
+<p>Affaibli et frustré, il crie : « Nous n’en avons pas terminé ! », crée un portail temporel et fuit le combat.</p></div>
+</section>
+
+<section class="sec" id="actions">
+<h2>Résoudre une action</h2>
+<div class="box"><p>Le combat de Liliput’Adventure oppose une <b>attaque (D20)</b> à une <b>défense fixe</b>. Pour toutes les autres actions (crocheter, grimper, convaincre, rallumer un feu…), le MJ fixe un <b>seuil</b> et le joueur lance un D20. On ne lance que si l’issue est incertaine et que l’échec serait intéressant ; le reste se résout au récit.</p></div>
+<div class="map" id="seuils"></div>
+<div class="pill">Lire le résultat</div>
+<table id="res"></table>
+<div class="g g2">
+<div class="box" style="background:var(--soft)"><p class="hl">Avantage : 2D20, on garde le meilleur</p><p>Un <b>trait</b> du personnage s’applique, plan créatif, objet détourné, aide d’un allié, jauge de scénario élevée.</p></div>
+<div class="box"><p class="hl">Désavantage : 2D20, on garde le pire</p><p>Le <b>défaut</b> (trait négatif) joue contre lui, chaos, outil manquant, action précipitée. Avantage et désavantage s’annulent ; ils ne se cumulent pas.</p></div>
+</div>
+<div class="box"><p><b>Jetons de chance</b> : 2 par joueur et par partie. Un jeton permet de relancer un jet (on garde le nouveau résultat). <b>Action à deux</b> : les deux lancent, on garde le meilleur dé.</p><p class="note">Le trait « Soldat émérite » de l’exemple de combat est un trait positif : il donne l’avantage. Un trait négatif donne le désavantage, et rapporte +1 à la jauge si le joueur en rit (en scénario).</p></div>
+<div class="pill">Quel outil pour quoi ?</div>
+<div class="mode">
+<div class="box"><p class="hl">Solo ou impro libre</p><p>Oracle D6 pour les questions, table D100 « Rebondissements » à chaque changement de scène.</p></div>
+<div class="box"><p class="hl">Scénario préparé (one shot)</p><p>Un acte par scène, 1 carte Incident (D10) par acte à la place du D100, seuil D20 pour les actions, jauge et fins en conclusion. Voir l’atelier ci-dessous.</p></div>
+<div class="box"><p class="hl">Dans les deux cas</p><p>Personnage, traits, vigueur, défense, attaque et dégâts restent ceux de Liliput’Adventure.</p></div>
+</div>
+</section>
+<section class="sec" id="tables">
+<h2>Tables aléatoires</h2>
+<div class="box"><p>En solo ou en impro, un peu de hasard à base de mots-clés aide à trouver l’inspiration. Quand votre personnage quitte une scène ou un lieu, <b>lancez un D100</b> pour savoir ce qui lui arrive, puis lancez le dé de la table indiquée. Utilisez le mot-clé pour nourrir votre imagination et décider de la suite logique.</p></div>
+<div class="pill">Rebondissements · D100</div>
+<div class="map">
+<div><b>1–10 · 41–50</b>Rencontre (D10)</div><div><b>11–20 · 51–60</b>Lieu (D10)</div><div><b>21–30 · 61–70</b>Indices (D10)</div><div><b>31–40 · 71–80</b>Événements (D10)</div><div><b>81–100</b>Bonus (D20 = jet − 80)</div>
+</div>
+<p class="note">Cette table remplace la liste de 100 entrées : le résultat est identique. Les tables Cosy et Romance (D12) se lancent à part, selon l’ambiance voulue.</p>
+<div class="g g3 big" id="tabs" style="margin-top:12px"></div>
+</section>
+
+<section class="sec" id="scenario">
+<h2>Atelier de scénario</h2>
+<div class="box"><p>Un modèle à remplir pour construire un one shot avec le système Liliput’Adventure. Écrivez directement dans les champs, puis imprimez. Le <b>personnage</b> se crée avec les règles de la partie « Création de personnage ».</p></div>
+<div class="rule" id="hero"></div>
+<div class="pill">1 · Le pitch</div>
+<div class="g g2">
+<div class="box"><p class="hl">Titre, genre, ton</p><span class="ph" contenteditable data-ph="Titre · genre · ton"></span><p class="hl">Format</p><span class="ph" contenteditable data-ph="Nb de MJ · nb de joueurs · durée"></span></div>
+<div class="box"><p class="hl">Pitch et objectif</p><span class="ph" contenteditable data-ph="Qui, où, quelle pression extérieure, quel objectif ?"></span></div>
+</div>
+<div class="pill">2 · Le PNJ principal</div>
+<div class="box">
+<p>Fiche à la façon Liliput : <b>Nom, type, âge, profil</b> <span class="ph" contenteditable data-ph="…"></span></p>
+<p><b>2 traits</b> (un positif, un négatif) <span class="ph" contenteditable data-ph="…"></span></p>
+<p><b>Vigueur / défense / attaque / dégâts</b> <span class="ph" contenteditable data-ph="…"></span></p>
+<p><b>Veut · craint · tic · secret</b> <span class="ph" contenteditable data-ph="…"></span></p></div>
+<div class="pill">3 · Les actes</div>
+<p class="note">Un acte = un lieu = une table d’incidents. Prévoyez 3 à 5 actes.</p>
+<div class="g g2" id="acts"></div>
+<div class="pill">4 · La jauge et les fins</div>
+<p>Nom de la jauge : <b contenteditable data-ph="[Complicité / Tension / Confiance…]" oninput="document.querySelectorAll('.jn').forEach(function(j){j.textContent=this.textContent}.bind(this))"></b> · +1 par geste (une seule fois par type de geste). Clique pour suivre le score.</p>
+<div class="track" id="track"></div>
+<div class="g g2" id="fins"></div>
+<div class="pill">5 · Boîte à outils du lieu</div>
+<p class="note">Tout objet de la liste peut être déclaré à tout moment si c’est plausible, et détourné : avantage au jet et +1 à la jauge s’il est partagé.</p>
+<div class="g g3" id="bag"></div>
+<div class="pill">6 · Cartes Incident</div>
+<p class="note">1 table de D10 par lieu. Le joueur peut piocher une carte de plus : +1 à la jauge s’il s’en sort. Le seuil indiqué est celui du D20 ; si la carte est tirée deux fois, elle revient en répétition.</p>
+<div id="incs"></div>
+<div class="bar"><button class="btn" onclick="addInc()">+ Ajouter une table d’incidents</button></div>
+<div class="pill">7 · Cadre de sécurité</div>
+<div class="g g2"><div class="box"><p class="hl">Règle d’or</p><span class="ph" contenteditable data-ph="Ex. : pas de méchant, pas d’échec définitif."></span></div><div class="box"><p class="hl">Mot de sortie</p><span class="ph" contenteditable data-ph="« … » : ralentir, changer de direction ou arrêter."></span></div></div>
+<div class="pill">Aide-mémoire de partie</div>
+<div class="box"><p>Gestes utilisés <span class="ph" contenteditable data-ph="…"></span></p><p>Cartes tirées <span class="ph" contenteditable data-ph="Acte 1 : … · Acte 2 : …"></span></p><p>Objets détournés <span class="ph" contenteditable data-ph="…"></span></p></div>
+</section>
+<section class="sec sheet" id="fiche">
+<h2>Feuille de personnage</h2>
+<p class="note">Clique sur un champ pour l’écrire, puis imprime la page.</p>
+<div class="g g2">
+<div class="box">
+<div class="f"><b>Nom</b><span contenteditable data-ph="…"></span></div>
+<div class="f"><b>Type</b><span contenteditable data-ph="…"></span></div>
+<div class="f"><b>Âge</b><span contenteditable data-ph="…"></span></div>
+<div class="f"><b>Profil</b><span contenteditable data-ph="…"></span></div>
+<div class="f"><b>Niveau</b><span contenteditable data-ph="1"></span></div>
+<div class="f"><b>Description</b><span contenteditable data-ph="…"></span></div>
+<p class="hl" style="margin:12px 0 2px;color:var(--gold)">Traits</p>
+<div class="f"><span contenteditable data-ph="Trait positif"></span></div><div class="f"><span contenteditable data-ph="Trait négatif"></span></div><div class="f"><span contenteditable data-ph="Trait"></span></div><div class="f"><span contenteditable data-ph="Trait"></span></div>
+</div>
+<div class="box">
+<div class="g" style="grid-template-columns:1fr 1fr"><div class="stat"><b>Vigueur</b><div class="circ" contenteditable data-ph=""></div></div><div class="stat"><b>Défense</b><div class="circ" contenteditable data-ph=""></div></div></div>
+<p class="hl" style="margin:14px 0 2px;color:var(--gold)">Attaque / Arme / Sort · Dégâts</p>
+<div class="f"><span contenteditable data-ph="Attaque"></span><span contenteditable data-ph="Dégâts"></span></div><div class="f"><span contenteditable data-ph="Attaque"></span><span contenteditable data-ph="Dégâts"></span></div><div class="f"><span contenteditable data-ph="Attaque"></span><span contenteditable data-ph="Dégâts"></span></div><div class="f"><span contenteditable data-ph="Attaque"></span><span contenteditable data-ph="Dégâts"></span></div>
+<p class="hl" style="margin:14px 0 4px;color:var(--gold)">Inventaire</p><div class="area s" contenteditable data-ph="Objets…"></div>
+</div>
+</div>
+<div class="g g2" style="margin-top:12px">
+<div><p class="hl" style="color:var(--gold);margin:0 0 4px">Biographie</p><div class="area" contenteditable data-ph="Histoire du personnage…"></div></div>
+<div><p class="hl" style="color:var(--gold);margin:0 0 4px">Notes</p><div class="area" contenteditable data-ph="Notes de partie…"></div></div>
+</div>
+</section>
+</div>
+<script>
+function tb(id,rows){document.getElementById(id).innerHTML=rows.map(function(r){return '<tr><td>'+r[0]+'</td><td>'+r[1]+'</td></tr>'}).join('')}
+tb('lvl',[['Nulle','< 5'],['Faible','5 à 8'],['Correcte','9 à 12'],['Bonne','13 à 16'],['Excellente','17 à 20'],['Parfaite','> 20']]);
+tb('dmg',[['Main nue, bâton, bois, objet lambda, flèches','1D4'],['Arme (épée, grand arc, objet lourd)','1D6'],['Arme supérieure (épée à deux mains, arbalète)','1D8'],['Arme légendaire, arme à feu','1D12']]);
+tb('vig',[['Très vulnérable (bébé, petit animal)','< 5'],['Vulnérable (enfant, villageois, animal moyen)','5 à 8'],['Correcte (personnage entraîné, héros, aventurier)','9 à 12'],['Bonne (soldat armé, gros animal)','13 à 16'],['Excellente (adversaire très puissant, très gros animal)','17 à 20'],['Invincible (chef d’armée, dragon…)','> 20']]);
+tb('rest',[['Bien manger et boire','1D4 / jour'],['Soin (potion, premiers soins, médicament)','1D4'],['Sieste','1D6'],['Une bonne nuit de sommeil','1D12']]);
+var T=[
+['Rencontre','D10',['Commerce','Petite rencontre','Rencontre moyenne','Rencontre de boss','Alliés','Ennemis','Inconnu','Personne importante','Personnel','Divine']],
+['Lieu','D10',['Passage secret','Céleste','Terrain difficile','Bâtiment','Religieux','Ruines','Végétation','Dangereux','Lieu public','Savoir']],
+['Indices','D10',['Objet magique','Armes','Information simple','Information importante','Information cruciale','Fausse information','Provisions','Objet bonus','Objet malus','Objet inconnu']],
+['Événements','D10',['Attroupement','Météo perturbée','Agression','Perdu','Accident','Retrouvailles','Union','Séparation','Transformation','Festivités']],
+['Cosy','D12',['Cabane','Cheminée','Potage','Cannelle','Aquarelle / Peinture','Sieste','Câlin','Châtaigne','Flânerie','Crépitement','Quiétude','Plaid']],
+['Romance','D12',['Amis d’enfance','Mariage arrangé','Triangle amoureux','Cœur brisé','Secret','Rival','Mensonge','Désir','Baiser','Envoûtement','Promesse','Séduction']],
+['Bonus','D20',['Enfants','Animal','Nourriture','Château','Rivière','Impasse','Trésor','Déni','Folie','Maladie','Temporalité','Oiseau','Technologie / mécanisme','Transport','Émotions','Éléments','Saison','Réunion','Poison','Rayonnement']]];
+document.getElementById('tabs').innerHTML=T.map(function(t){return '<div class="tb"><h3>'+t[0]+' <small>'+t[1]+'</small></h3><ol>'+t[2].map(function(x,i){return '<li><i>'+(i+1)+'.</i>'+x+'</li>'}).join('')+'</ol></div>'}).join('');
+document.querySelectorAll('#tabs .tb').forEach(function(e,i){if(i==6)e.style.gridColumn='1/-1'});
+
+function ed(ph,c){return '<span class="'+(c||'')+'" contenteditable data-ph="'+ph+'"></span>'}
+document.getElementById('hero').innerHTML='Liliput’Adventure · '+ed('Titre du scénario');
+document.getElementById('seuils').innerHTML=[[8,'Facile'],[12,'Normal'],[15,'Difficile'],[18,'Fou']].map(function(x){return '<div><b>'+x[0]+' · '+x[1]+'</b>'+ed('exemple','note')+'</div>'}).join('');
+tb('res',[['20 naturel','Réussite éclatante'],['Seuil +5 ou plus','Réussite brillante, avec un petit plus'],['Seuil à seuil +4','Réussite'],['Seuil −1 à −3','Réussite coûteuse : complication'],['Seuil −4 ou moins','Échec qui fait avancer l’histoire'],['1 naturel','Gaffe légendaire']]);
+document.getElementById('acts').innerHTML=[1,2,3,4,5].map(function(i){return '<div class="box"><p class="hl">Acte '+i+' · '+ed('xx')+' min</p><p>'+ed('Titre et lieu','ph')+'</p><p>'+ed('Scène, enjeu, objectif…','ph')+'</p><p class="note">Tirage : D10 table '+i+'</p></div>'}).join('');
+var cl=['#e9dfb8','#e9dfb8','#e9dfb8','#e9dfb8','#f3dca4','#f3dca4','#f3dca4','#c9a227','#c9a227','#c9a227','#16150f'];
+document.getElementById('track').innerHTML=cl.map(function(c,i){return '<button onclick="document.querySelectorAll(\'#track button\').forEach(function(x){x.classList.remove(\'on\')});this.classList.add(\'on\')">'+i+'</button>'}).join('');
+document.getElementById('fins').innerHTML=['0 à 3','4 à 6','7 à 9','10'].map(function(r){return '<div class="box"><p class="hl">'+r+' · '+ed('Nom de la fin')+'</p><p>'+ed('Ce qui se passe…','ph')+'</p></div>'}).join('');
+document.getElementById('bag').innerHTML=[1,2,3].map(function(){return '<div class="tb"><h3>'+ed('Catégorie')+'</h3><div class="chips"><span class="chip" contenteditable data-ph="objet"></span><span class="chip" contenteditable data-ph="objet"></span><span class="chip" contenteditable data-ph="objet"></span><button class="add" onclick="var c=document.createElement(\'span\');c.className=\'chip\';c.contentEditable=true;c.dataset.ph=\'objet\';this.parentNode.insertBefore(c,this);c.focus()">+ objet</button></div></div>'}).join('');
+function incSet(n){var d=document.createElement('div');d.className='incset';var h='<h3 style="font:700 1.2rem var(--hd);margin:16px 0 2px">Lieu '+n+' · '+ed('Nom du lieu')+'</h3><p class="note">Acte '+n+' · '+ed('titre')+'</p><div class="g g2">';
+for(var i=1;i<=10;i++)h+='<div class="ic'+(i==10?' bonus':'')+'"><b class="num">'+i+'</b><div><b>'+ed('Incident')+'</b><div class="p">Seuil '+ed('12')+' · Piste : '+ed('objets, idées…')+'</div></div></div>';
+d.innerHTML=h+'</div>';return d}
+function addInc(){var b=document.getElementById('incs');b.appendChild(incSet(b.children.length+1))}
+for(var k=0;k<5;k++)addInc();
+</script>
+<script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js")})</script>
+</body>
+</html>

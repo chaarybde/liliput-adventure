@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Liliput’Adventure · Fiches personnages et PNJ</title>
+<link rel="manifest" href="manifest.webmanifest"><meta name="theme-color" content="#16150f"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-title" content="Liliput"><meta name="apple-mobile-web-app-status-bar-style" content="black-translucent"><link rel="apple-touch-icon" href="icons/icon-180.png"><link rel="icon" href="icons/icon-192.png">
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cinzel+Decorative:wght@700&family=Cinzel:wght@500;700&family=Dancing+Script:wght@600&family=Poppins:wght@400;600&display=swap">
+<style>
+:root{--bg:#f4efe3;--paper:#fffdf7;--ink:#1d1b16;--mut:#6a6454;--gold:#c9a227;--soft:#faf1d2;--line:#e6dcb8;--blk:#16150f;--onblk:#e7c657;--red:#a8432d;
+--disp:"Cinzel Decorative","Cinzel",Georgia,serif;--hd:"Cinzel",Georgia,serif;--scr:"Dancing Script","Segoe Script",cursive;--tx:"Poppins",system-ui,sans-serif;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#121109;--paper:#1c1a12;--ink:#f1ead6;--mut:#aaa38c;--gold:#e0b83d;--soft:#2a2512;--line:#3d3720;--blk:#0b0a06;--red:#e5806a}}
+:root[data-theme="dark"]{--bg:#121109;--paper:#1c1a12;--ink:#f1ead6;--mut:#aaa38c;--gold:#e0b83d;--soft:#2a2512;--line:#3d3720;--blk:#0b0a06;--red:#e5806a}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font:15px/1.55 var(--tx)}
+header{text-align:center;padding:22px 16px 6px}
+header h1{font:700 clamp(1.8rem,6vw,2.8rem)/1.1 var(--disp);color:var(--gold);margin:0}
+header p{margin:4px 0 0;font:600 1.3rem var(--scr)}
+nav{position:sticky;top:0;z-index:5;background:var(--blk);display:flex;gap:6px;justify-content:center;padding:8px 10px;padding-top:calc(8px + env(safe-area-inset-top,0px));overflow-x:auto}
+nav button{background:none;border:1px solid transparent;color:var(--onblk);font:600 .85rem var(--tx);padding:6px 14px;border-radius:99px;cursor:pointer;white-space:nowrap}
+nav button.on{background:var(--gold);color:#16150f}
+main{max-width:900px;margin:0 auto;padding:16px 16px 60px}
+.panel{display:none}.panel.on{display:block}
+.tools{display:flex;flex-wrap:wrap;gap:8px;align-items:center;margin:10px 0 14px}
+.btn{background:var(--blk);color:var(--onblk);border:0;border-radius:99px;padding:8px 16px;font:600 .85rem var(--tx);cursor:pointer}
+.btn.g{background:var(--gold);color:#16150f}.btn.o{background:none;border:1px solid var(--mut);color:var(--ink)}.btn.d{background:var(--red);color:#fff}
+.badge{margin-left:auto;font-size:.78rem;color:var(--mut)}
+.cur{font-size:.85rem;color:var(--mut);margin:0 0 8px}
+.sec{background:var(--paper);border:1px solid var(--line);border-radius:18px;margin-bottom:14px;overflow:hidden}
+.sec h3{margin:0;background:var(--blk);color:var(--onblk);font:600 1.25rem var(--scr);padding:4px 18px}
+.sec .in{padding:12px 18px;display:grid;gap:8px 18px;grid-template-columns:repeat(auto-fit,minmax(240px,1fr))}
+.fd{display:flex;flex-direction:column;gap:2px}.fd.w{grid-column:1/-1}
+.fd label{font:600 .72rem var(--tx);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.ln,.ar{background:var(--soft);border:1px solid var(--line);border-radius:10px;padding:6px 10px;outline:none;min-height:34px}
+.ar{min-height:84px}.ar.l{min-height:170px}
+.ln:focus,.ar:focus,.nm:focus{box-shadow:0 0 0 2px var(--gold)}
+[contenteditable]:empty::before{content:attr(data-ph);color:var(--mut);opacity:.55}
+.stats{display:flex;gap:22px;flex-wrap:wrap;grid-column:1/-1;justify-content:space-around}
+.nm{width:92px;height:92px;border-radius:50%;border:3px solid var(--blk);display:grid;place-items:center;font:700 1.8rem var(--hd);background:var(--soft);outline:none}
+.st{text-align:center}.st label{display:block;margin-top:4px;font:600 .72rem var(--tx);letter-spacing:.08em;text-transform:uppercase;color:var(--gold)}
+.hi{border-top:5px solid var(--red)}
+.list{display:grid;gap:10px;grid-template-columns:repeat(auto-fit,minmax(260px,1fr))}
+.it{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:14px;padding:12px 14px}
+.it.pnj{border-left-color:var(--red)}.it h4{margin:0;font:700 1.05rem var(--hd)}.it small{color:var(--mut)}.it .a{display:flex;gap:6px;flex-wrap:wrap;margin-top:8px}
+.it .a .btn{padding:4px 12px;font-size:.78rem}
+h2.t{font:700 1.3rem var(--hd);color:var(--gold);margin:16px 0 8px}
+.empty{color:var(--mut);font-style:italic}
+#toast{position:fixed;left:50%;bottom:calc(18px + env(safe-area-inset-bottom,0px));transform:translateX(-50%);background:var(--blk);color:var(--onblk);padding:9px 20px;border-radius:99px;font-weight:600;opacity:0;transition:.25s;pointer-events:none;z-index:9}
+#toast.on{opacity:1}
+@media print{body{background:#fff}nav,.tools,#toast,header p{display:none}.panel{display:none!important}.panel.on{display:block!important}.sec{break-inside:avoid}*{-webkit-print-color-adjust:exact;print-color-adjust:exact}}
+</style>
+</head>
+<body>
+<header><h1>Liliput’Adventure</h1><p>Fiches personnages et PNJ</p></header>
+<nav><a href="index.html" style="color:#e7c657;text-decoration:none;font:600 .85rem system-ui;padding:6px 14px;border-radius:99px;border:1px solid #e7c657;white-space:nowrap">⌂ Accueil</a><button class="on" data-p="pj">Fiche personnage</button><button data-p="pnj">Fiche PNJ</button><button data-p="save">Mes fiches sauvegardées</button></nav>
+<main>
+<section class="panel on" id="pj"><div class="tools"></div><p class="cur"></p><div class="form"></div></section>
+<section class="panel" id="pnj"><div class="tools"></div><p class="cur"></p><div class="form"></div></section>
+<section class="panel" id="save">
+<div class="tools"><button class="btn g" onclick="exportAll()">Exporter (.json)</button><label class="btn o">Importer<input type="file" accept=".json,application/json" hidden onchange="importFile(this)"></label><span class="badge" id="mode">Connexion au stockage…</span></div>
+<h2 class="t">Mes personnages</h2><div class="list" id="l-pj"></div>
+<h2 class="t">Mes PNJ</h2><div class="list" id="l-pnj"></div>
+</section>
+</main>
+<div id="toast"></div>
+<script>
+// ---------- Schémas ----------
+var S={
+pj:{label:'personnage',title:function(f){return f.nom||'Sans nom'},sub:function(f){return [f.type,f.profil].filter(Boolean).join(' · ')},sec:[
+['Identité',[['nom','Nom'],['type','Type (race, nationalité…)'],['age','Âge'],['profil','Profil (métier, domaine)'],['niveau','Niveau'],['desc','Description','a w']]],
+['Traits',[['t1','Trait positif','w'],['t2','Trait négatif','w'],['t3','Trait','w'],['t4','Trait','w']]],
+['Vigueur et défense',[['__stats',[['vig','Vigueur'],['vmax','Vigueur max'],['def','Défense']]]]],
+['Attaques, armes et sorts',[['a1','Attaque / arme / sort'],['d1','Dégâts'],['a2','Attaque / arme / sort'],['d2','Dégâts'],['a3','Attaque / arme / sort'],['d3','Dégâts'],['a4','Attaque / arme / sort'],['d4','Dégâts']]],
+['Inventaire',[['inv','Objets portés','a w']]],
+['Biographie',[['bio','Histoire du personnage','al w']]],
+['Notes',[['notes','Notes de partie','al w']]]]},
+pnj:{label:'PNJ',title:function(f){return f.nom||'PNJ sans nom'},sub:function(f){return [f.role,f.profil].filter(Boolean).join(' · ')},sec:[
+['Identité',[['nom','Nom'],['type','Type (race, nationalité…)'],['age','Âge'],['profil','Profil (métier, domaine)'],['role','Rôle dans l’histoire (allié, rival, mentor…)'],['lieu','Où le trouve-t-on ?']]],
+['Apparence et voix',[['app','Apparence, vêtements, signe distinctif','a'],['voix','Voix, manière de parler, phrases typiques','a']]],
+['Traits',[['t1','Trait positif'],['t2','Trait négatif']]],
+['Combat',[['__stats',[['vig','Vigueur'],['def','Défense'],['atk','Attaque (bonus)']]],['arme','Arme / attaque / sort'],['deg','Dégâts'],['menace','Niveau de menace','w']]],
+['Motivations',[['veut','Ce qu’il veut','a'],['craint','Ce qu’il craint','a'],['secret','Son secret','a'],['tic','Son tic, sa manie','a']]],
+['Comment le jouer',[['jeu','Attitude, humeur, réactions face aux joueurs','a w']]],
+['Relations',[['rel','Alliés, ennemis, famille, liens avec les autres PNJ','a w']]],
+['Objets et indices',[['obj','Ce qu’il possède','a'],['ind','Ce qu’il peut révéler','a']]],
+['Notes du MJ',[['notes','Notes privées','al w']],'hi']]}};
+var cur={pj:null,pnj:null};
+function fieldHTML(k,key,lab,cls){cls=cls||'';var w=cls.indexOf('w')>-1?' w':'',t=cls.indexOf('al')>-1?'ar l':cls.indexOf('a')>-1?'ar':'ln';
+return '<div class="fd'+w+'"><label>'+lab+'</label><div class="'+t+'" contenteditable data-k="'+key+'" data-ph="…"></div></div>'}
+function render(k){var h='';S[k].sec.forEach(function(s){h+='<div class="sec '+(s[2]||'')+'"><h3>'+s[0]+'</h3><div class="in">';
+s[1].forEach(function(f){if(f[0]=='__stats'){h+='<div class="stats">'+f[1].map(function(x){return '<div class="st"><div class="nm" contenteditable data-k="'+x[0]+'"></div><label>'+x[1]+'</label></div>'}).join('')+'</div>'}else h+=fieldHTML(k,f[0],f[1],f[2])});
+h+='</div></div>'});
+var p=document.getElementById(k);p.querySelector('.form').innerHTML=h;
+p.querySelector('.tools').innerHTML='<button class="btn g" onclick="saveCur(\''+k+'\',false)">Enregistrer</button><button class="btn" onclick="saveCur(\''+k+'\',true)">Enregistrer une copie</button><button class="btn o" onclick="newSheet(\''+k+'\')">Nouvelle fiche vierge</button><button class="btn o" onclick="window.print()">Imprimer / PDF</button>';
+upd(k)}
+function upd(k){document.getElementById(k).querySelector('.cur').textContent=cur[k]?'Fiche enregistrée · les modifications s’appliquent avec « Enregistrer ».':'Nouvelle fiche non enregistrée.'}
+function collect(k){var f={};document.getElementById(k).querySelectorAll('[data-k]').forEach(function(e){f[e.dataset.k]=e.innerText.trim()});return f}
+function fill(k,f){document.getElementById(k).querySelectorAll('[data-k]').forEach(function(e){e.textContent=f[e.dataset.k]||''})}
+function newSheet(k){cur[k]=null;fill(k,{});upd(k);toast('Fiche vierge prête')}
+// ---------- Stockage (compte via db, sinon appareil) ----------
+var db=null,col=null,mode='local',LS='liliput_fiches_v1';
+var ready=(async function(){try{if(window.claude&&claude.use){var d=await claude.use('db'),u=await claude.use('user');var id=u&&await u.id();if(d&&id){db=d;col=d.collection('data/users/'+id);mode='cloud'}}}catch(e){}
+document.getElementById('mode').textContent=mode=='cloud'?'Sauvegarde sur ton compte (synchronisée)':'Sauvegarde sur cet appareil seulement';return refresh()})();
+function lsAll(){try{return JSON.parse(localStorage.getItem(LS)||'[]')}catch(e){return[]}}
+function lsPut(a){try{localStorage.setItem(LS,JSON.stringify(a))}catch(e){}}
+async function all(){if(mode=='cloud'){try{var s=await col.get();return s.docs.map(function(d){var x=d.data();return{id:d.id,kind:x.kind,title:x.title,sub:x.sub,at:x.at,f:JSON.parse(x.fj||'{}')}})}catch(e){}}return lsAll()}
+async function put(r){if(mode=='cloud'){try{await col.doc(r.id).set({kind:r.kind,title:r.title,sub:r.sub,at:r.at,fj:JSON.stringify(r.f)});return}catch(e){mode='local';document.getElementById('mode').textContent='Sauvegarde sur cet appareil seulement'}}
+var a=lsAll().filter(function(x){return x.id!=r.id});a.push(r);lsPut(a)}
+async function del(id){if(mode=='cloud'){try{await col.doc(id).delete()}catch(e){}}lsPut(lsAll().filter(function(x){return x.id!=id}))}
+function uid(){return 'f'+Date.now().toString(36)+Math.random().toString(36).slice(2,6)}
+async function saveCur(k,copy){await ready;var f=collect(k);var id=(!copy&&cur[k])||uid();
+await put({id:id,kind:k,title:S[k].title(f),sub:S[k].sub(f),at:Date.now(),f:f});cur[k]=id;upd(k);toast('Enregistré : '+S[k].title(f));refresh()}
+async function refresh(){var a=(await all()).sort(function(x,y){return y.at-x.at});
+['pj','pnj'].forEach(function(k){var l=a.filter(function(x){return x.kind==k});
+document.getElementById('l-'+k).innerHTML=l.length?l.map(function(x){return '<div class="it '+k+'"><h4>'+esc(x.title)+'</h4><small>'+esc(x.sub||'—')+' · '+new Date(x.at).toLocaleDateString('fr-FR')+'</small><div class="a"><button class="btn g" data-o="'+x.id+'">Ouvrir</button><button class="btn" data-c="'+x.id+'">Dupliquer</button><button class="btn o" data-x="'+x.id+'">Supprimer</button></div></div>'}).join(''):'<p class="empty">Aucune fiche enregistrée pour le moment.</p>'});
+window._all=a}
+function esc(s){return String(s==null?'':s).replace(/[&<>"]/g,function(c){return{'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c]})}
+document.getElementById('save').addEventListener('click',async function(e){var b=e.target.closest('button');if(!b)return;var id=b.dataset.o||b.dataset.c||b.dataset.x;if(!id)return;var r=window._all.find(function(x){return x.id==id});if(!r)return;
+if(b.dataset.o){cur[r.kind]=r.id;fill(r.kind,r.f);upd(r.kind);show(r.kind);toast('Fiche ouverte')}
+else if(b.dataset.c){await put({id:uid(),kind:r.kind,title:r.title+' (copie)',sub:r.sub,at:Date.now(),f:r.f});toast('Copie créée');refresh()}
+else if(b.dataset.x){if(b.dataset.arm){await del(id);toast('Supprimée');refresh()}else{b.dataset.arm=1;b.textContent='Confirmer ?';b.className='btn d';setTimeout(function(){b.dataset.arm='';b.textContent='Supprimer';b.className='btn o'},3000)}}});
+// ---------- Export / import ----------
+async function exportAll(){var a=await all();try{var d=window.claude&&await claude.use('downloads');var s=JSON.stringify(a,null,1);if(d)await d.save({filename:'fiches-liliput.json',data:s});else{var l=document.createElement('a');l.href=URL.createObjectURL(new Blob([s],{type:'application/json'}));l.download='fiches-liliput.json';l.click()}}catch(e){toast('Export impossible ici')}}
+function importFile(i){var r=new FileReader();r.onload=async function(){try{var a=JSON.parse(r.result);for(var x of a){if(x&&x.kind&&x.f){x.id=uid();await put(x)}}toast('Import terminé');refresh()}catch(e){toast('Fichier invalide')}};if(i.files[0])r.readAsText(i.files[0]);i.value=''}
+// ---------- Navigation ----------
+function show(p){document.querySelectorAll('.panel').forEach(function(x){x.classList.toggle('on',x.id==p)});document.querySelectorAll('nav button').forEach(function(b){b.classList.toggle('on',b.dataset.p==p)});window.scrollTo(0,0);if(p=='save')refresh()}
+document.querySelectorAll('nav button').forEach(function(b){b.onclick=function(){show(b.dataset.p)}});
+var tt;function toast(m){var t=document.getElementById('toast');t.textContent=m;t.classList.add('on');clearTimeout(tt);tt=setTimeout(function(){t.classList.remove('on')},2200)}
+render('pj');render('pnj');
+</script>
+<script>if("serviceWorker"in navigator)addEventListener("load",function(){navigator.serviceWorker.register("sw.js")})</script>
+</body>
+</html>
